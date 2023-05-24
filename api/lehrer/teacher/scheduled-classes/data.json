@@ -1,0 +1,44 @@
+{
+  "classes": [
+    {
+      "id": 1,
+      "student": "Alice Johnson",
+      "classType": "History",
+      "date": "2023-05-19",
+      "time": "09:00",
+      "status": "Pending"
+    },
+    {
+      "id": 2,
+      "student": "Bob Smith",
+      "classType": "English",
+      "date": "2023-05-20",
+      "time": "10:30",
+      "status": "Completed"
+    },
+    {
+      "id": 3,
+      "student": "Emma Davis",
+      "classType": "Mathematics",
+      "date": "2023-05-21",
+      "time": "13:00",
+      "status": "Pending"
+    },
+    {
+      "id": 4,
+      "student": "John Anderson",
+      "classType": "Science",
+      "date": "2023-05-22",
+      "time": "15:30",
+      "status": "Scheduled"
+    },
+    {
+      "id": 5,
+      "student": "Sophia Martinez",
+      "classType": "Art",
+      "date": "2023-05-23",
+      "time": "11:00",
+      "status": "Pending"
+    }
+  ]
+}
