@@ -8,21 +8,35 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import '../styles/layout/layout.scss';
 import '../styles/demo/Demos.scss';
+import { AuthContextProvider } from '../context/AuthContext';
+import { useRouter } from 'next/router';
+import ProtectedRoute from '../components/ProtectedRoute';
+const noAuthRequired = ['/auth/login', '/auth/signup', '/']
 
 type Props = AppProps & {
     Component: Page;
 };
 
 export default function MyApp({ Component, pageProps }: Props) {
+    const router = useRouter();
     if (Component.getLayout) {
-        return <LayoutProvider>{Component.getLayout(<Component {...pageProps} />)}</LayoutProvider>;
+        return (<AuthContextProvider><LayoutProvider>{Component.getLayout(<Component {...pageProps} />)}</LayoutProvider></AuthContextProvider>);
     } else {
         return (
-            <LayoutProvider>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </LayoutProvider>
+            <AuthContextProvider>
+                <LayoutProvider>
+                    <Layout>
+                        {noAuthRequired.includes(router.pathname) ? (
+                            <Component {...pageProps} />
+                        ) : (
+                            <ProtectedRoute>
+                                <Component {...pageProps} />
+                            </ProtectedRoute>
+                        )}
+
+                    </Layout>
+                </LayoutProvider>
+            </AuthContextProvider>
         );
     }
 }
