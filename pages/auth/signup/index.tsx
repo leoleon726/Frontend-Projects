@@ -32,9 +32,9 @@ const SignUpPage: Page = () => {
 
     const handleSignup = async (e: any) => {
         e.preventDefault()
-
         try {
-            await signup(data.email, data.password, data.confirmPassword, data.name, data.lastname, data.phone, data.conditions)
+            await signup(data.email, data.password, data.confirmPassword, data.name, data.lastname, data.phone, data.conditions);
+            router.push('/auth/login');
         } catch (err) {
             console.log(err)
         }
@@ -88,10 +88,10 @@ const SignUpPage: Page = () => {
                                 onChange={(e: any) =>
                                     setData({
                                         ...data,
-                                        password: e.target.value,
+                                        confirmPassword: e.target.value,
                                     })
                                 }
-                                value={data.password}></Password>
+                                value={data.confirmPassword}></Password>
                             <label htmlFor="name_signup" className="block text-900 text-xl font-medium mb-2">
                                 Nombre
                             </label>
