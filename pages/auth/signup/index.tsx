@@ -76,7 +76,7 @@ const SignUpPage: Page = () => {
     const getFormErrorMessage = (notvalid: boolean, message: string) => {
         return notvalid ? <small className="p-error">{message}</small> : <small className="p-error">&nbsp;</small>;
     };
-    const isFormValid = isValidEmail && isValidPassword && isValidName && isValidLastname && checked;
+    const isFormValid = isValidEmail && isValidPassword && isValidName && isValidLastname && data.conditions;
     const router = useRouter();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
