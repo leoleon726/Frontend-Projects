@@ -12,6 +12,7 @@ import { classNames } from 'primereact/utils';
 import { Page } from '../../../types/types';
 import { Form } from 'react-bootstrap';
 import { useAuth } from '../../../context/AuthContext';
+import Link from 'next/link';
 
 const LoginPage: Page = () => {
     const [checked, setChecked] = useState(false);
@@ -71,6 +72,7 @@ const LoginPage: Page = () => {
                             }
                                 value={data.password}
                                 required
+                                feedback={false}
                                 type="password" placeholder="Password" toggleMask className="w-full mb-5" inputClassName="w-full p-3 md:w-30rem"></Password>
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5">
@@ -82,7 +84,10 @@ const LoginPage: Page = () => {
                                     Forgot password?
                                 </a>
                             </div>
-                            <Button label="Sign In" className="w-full p-3 text-xl" type='submit'></Button>
+                            <Button label="Ingresa" className="w-full p-3 text-xl" type='submit'></Button>
+                            <Link href="/auth/signup" passHref>
+                                <Button label="Registrate" className="w-full p-3 text-xl mt-3" severity="secondary" ></Button>
+                            </Link>
                         </Form>
                     </div>
                 </div>
