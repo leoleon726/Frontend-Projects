@@ -4,8 +4,13 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
+    updateProfile,
+    User,
+    sendEmailVerification,
+    UserCredential,
 } from 'firebase/auth'
-import { auth } from '../config/firebase'
+import db, { auth } from '../config/firebase'
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 const AuthContext = createContext<any>({})
 
@@ -37,11 +42,39 @@ export const AuthContextProvider = ({
         return () => unsubscribe()
     }, [])
 
-    const signup = (email: string, password: string, confirmPassword: string, name: string, lastname: string, phone: string, conditions: boolean) => {
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+    const signup = async (email: string, password: string, name: string, lastname: string, conditions: boolean) => {
+        try {
 
-    const login = (email: string, password: string) => {
+            const displayName = name;
+            var valid: boolean = true;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(async () => {
+                    await updateProfile(auth.currentUser as User, { displayName })
+                }).catch((err) =>
+                    valid = false
+                );
+            if (valid) {
+                const userData = {
+                    email,
+                    name,
+                    lastname,
+                    conditions,
+                };
+                await sendEmailVerification(auth.currentUser as User).catch((err) =>
+                    console.log(err)
+                );
+
+                const docRef = doc(db, 'users', user.uid);
+                await setDoc(docRef, userData);
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+        }
+        console.log('Signup successful!');
+
+    };
+
+    const login = (email: string, password: string, errorMessage) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
