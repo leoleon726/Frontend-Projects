@@ -15,18 +15,19 @@ import { Divider } from 'primereact/divider';
 
 const SignUpPage: Page = () => {
     const { user, signup } = useAuth();
+    console.log(user);
     const { layoutConfig } = useContext(LayoutContext);
     const [data, setData] = useState({
         email: '',
         password: '',
-        confirmPassword: '',
         name: '',
         lastname: '',
-        phone: '',
         conditions: false
     });
+
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [isValidPassword, setisValidPassword] = useState(false);
+    const [isConfirmPassword, setisConfirmPassword] = useState(false);
     const [isValidName, setIsValidName] = useState(false);
     const [isValidLastname, setIsValidLastname] = useState(false);
 
@@ -47,7 +48,6 @@ const SignUpPage: Page = () => {
             await signup(
                 data.email,
                 data.password,
-                data.confirmPassword,
                 data.name,
                 data.lastname,
                 data.conditions
@@ -72,11 +72,7 @@ const SignUpPage: Page = () => {
         }
         return missingChars;
     }
-
-    const getFormErrorMessage = (notvalid: boolean, message: string) => {
-        return notvalid ? <small className="p-error">{message}</small> : <small className="p-error">&nbsp;</small>;
-    };
-    const isFormValid = isValidEmail && isValidPassword && isValidName && isValidLastname && data.conditions;
+    const isFormValid = isValidEmail && isValidPassword && isConfirmPassword && isValidName && isValidLastname && data.conditions;
     const router = useRouter();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
@@ -142,6 +138,24 @@ const SignUpPage: Page = () => {
                                 }
                                 value={data.password}
                             />
+                            <label htmlFor="password_signup" className="block text-900 font-medium text-xl mb-2">
+                                Confirmar Contrasena
+                            </label>
+                            <Password
+                                inputId="cpassword_signup"
+                                placeholder="Confirmar Contrasena"
+                                toggleMask
+                                className={`w-full mb-5 ${!isConfirmPassword && data.password != '' ? 'p-invalid' : ''}`}
+                                inputClassName="w-full p-3 md:w-30rem"
+                                feedback={false}
+                                onChange={(e: any) => {
+                                    let aux = e.target.value;
+                                    if (aux === data.password) {
+                                        setisConfirmPassword(true);
+                                    }
+                                }
+                                }
+                            />
 
                             <label htmlFor="name_signup" className="block text-900 text-xl font-medium mb-2">
                                 Nombre
@@ -194,7 +208,8 @@ const SignUpPage: Page = () => {
                                         inputId="conditions_signup"
                                         checked={data.conditions}
                                         onChange={(e: any) => {
-                                            let aux = e.target.value;
+                                            let aux = e.target.checked;
+                                            console.log(aux);
                                             setData((data) => ({ ...data, conditions: aux }));
                                         }}
                                         className="mr-2"
@@ -221,7 +236,4 @@ SignUpPage.getLayout = function getLayout(page) {
 };
 
 export default SignUpPage;
-function useForm(arg0: { defaultValues: any; }) {
-    throw new Error('Function not implemented.');
-}
 

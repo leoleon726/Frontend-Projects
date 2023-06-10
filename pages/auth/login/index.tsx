@@ -13,12 +13,14 @@ import { Page } from '../../../types/types';
 import { Form } from 'react-bootstrap';
 import { useAuth } from '../../../context/AuthContext';
 import Link from 'next/link';
+import styles from './login.module.css';
 
 const LoginPage: Page = () => {
     const [checked, setChecked] = useState(false);
     const router = useRouter();
     const { layoutConfig } = useContext(LayoutContext);
     const { user, login } = useAuth();
+    const [errorMessage, setErrorMessage] = useState(false);
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -27,12 +29,13 @@ const LoginPage: Page = () => {
         e.preventDefault();
 
         try {
-            await login(data.email, data.password);
+            await login(data.email, data.password, errorMessage);
             router.push('/lehrer/teacher')
         } catch (err) {
-            console.log(err)
+            setErrorMessage(true);
         }
     }
+
 
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
@@ -84,6 +87,9 @@ const LoginPage: Page = () => {
                                     Forgot password?
                                 </a>
                             </div>
+                            {errorMessage && <div className="text-center mb-5">
+                                <p className={styles.errorMessage}>Verifica tu email con tu contrasena</p>
+                            </div>}
                             <Button label="Ingresa" className="w-full p-3 text-xl" type='submit'></Button>
                             <Link href="/auth/signup" passHref>
                                 <Button label="Registrate" className="w-full p-3 text-xl mt-3" severity="secondary" ></Button>
