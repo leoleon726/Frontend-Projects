@@ -179,7 +179,22 @@ const index = () => {
             setCustomers1(getCustomers(data));
             setLoading1(false);
         });
-
+        //CustomerService.accessPostPage();
+        //CustomerService.accessTestPage();
+        const requestUrl = 'http://localhost:8082/test-lehrer/auth/token';
+        const data = {
+            leo: 'leoleon'
+        }
+        const options = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            data: data,
+        };
+        const result = CustomerService.requestAuth(requestUrl, options);
+        console.log(result);
         initFilters1();
     }, []);
 
