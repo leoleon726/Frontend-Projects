@@ -1,0 +1,9 @@
+.underlineOnHover {
+  text-decoration: underline;
+  transition: text-decoration 0.3s;
+}
+
+.underlineOnHover:hover {
+  text-decoration: none;
+  color: green;
+}
