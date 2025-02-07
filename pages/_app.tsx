@@ -11,6 +11,7 @@ import { AuthContextProvider } from "@presentation/context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedRoute from "@presentation/components/ProtectedRoute";
 const noAuthRequired = ["/auth/login", "/auth/signup", "/"];
+import { PrimeReactProvider } from "primereact/api";
 
 type Props = AppProps & {
   Component: Page;
@@ -26,19 +27,21 @@ export default function MyApp({ Component, pageProps }: Props) {
     );
   } else {
     return (
-      <AuthContextProvider>
-        <LayoutProvider>
-          <Layout>
-            {noAuthRequired.includes(router.pathname) ? (
-              <Component {...pageProps} />
-            ) : (
-              <ProtectedRoute>
+      <PrimeReactProvider value={{ ripple: true }}>
+        <AuthContextProvider>
+          <LayoutProvider>
+            <Layout>
+              {noAuthRequired.includes(router.pathname) ? (
                 <Component {...pageProps} />
-              </ProtectedRoute>
-            )}
-          </Layout>
-        </LayoutProvider>
-      </AuthContextProvider>
+              ) : (
+                <ProtectedRoute>
+                  <Component {...pageProps} />
+                </ProtectedRoute>
+              )}
+            </Layout>
+          </LayoutProvider>
+        </AuthContextProvider>
+      </PrimeReactProvider>
     );
   }
 }

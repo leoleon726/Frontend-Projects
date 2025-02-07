@@ -1,7 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
-
-import PrimeReact from "primereact/api";
+import { PrimeReactContext } from "primereact/api";
 import { Button } from "primereact/button";
 import { InputSwitchChangeEvent } from "primereact/inputswitch";
 import { RadioButton, RadioButtonChangeEvent } from "primereact/radiobutton";
@@ -12,6 +9,7 @@ import { AppConfigProps, LayoutConfig, LayoutState } from "@utils/types/types";
 import { LayoutContext } from "./context/layoutcontext";
 
 const AppConfig = (props: AppConfigProps) => {
+  const primeReact = useContext(PrimeReactContext);
   const [scales] = useState([12, 13, 14, 15, 16]);
   const { layoutConfig, setLayoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
 
@@ -28,7 +26,7 @@ const AppConfig = (props: AppConfigProps) => {
   };
 
   const changeRipple = (e: InputSwitchChangeEvent) => {
-    PrimeReact.ripple = e.value as boolean;
+    primeReact.ripple = e.value as boolean;
     setLayoutConfig((prevState: LayoutConfig) => ({ ...prevState, ripple: e.value as boolean }));
   };
 
@@ -37,9 +35,12 @@ const AppConfig = (props: AppConfigProps) => {
   };
 
   const changeTheme = (theme: string, colorScheme: string) => {
-    PrimeReact.changeTheme?.(layoutConfig.theme, theme, "theme-css", () => {
+    const themeLink = document.getElementById("theme-css") as HTMLLinkElement;
+
+    if (themeLink) {
+      themeLink.href = `primereact/resources/themes/${theme}/theme.css`;
       setLayoutConfig((prevState: LayoutConfig) => ({ ...prevState, theme, colorScheme }));
-    });
+    }
   };
 
   const decrementScale = () => {
@@ -131,12 +132,12 @@ const AppConfig = (props: AppConfigProps) => {
         <h5>Tipo de Template</h5>
         <div className="grid">
           <div className="col-6">
-            <button className="p-link w-2rem h-2rem" onClick={() => changeTheme("lara-light-teal", "light")}>
+            <button className="p-link w-2rem h-2rem" onClick={() => changeTheme("lara-light-cyan", "light")}>
               <i className="pi pi-sun text-teal-500"></i>Claro
             </button>
           </div>
           <div className="col-6">
-            <button className="p-link w-2rem h-2rem" onClick={() => changeTheme("lara-dark-teal", "dark")}>
+            <button className="p-link w-2rem h-2rem" onClick={() => changeTheme("lara-dark-cyan", "dark")}>
               <i className="pi pi-moon text-teal-500"></i>Oscuro
             </button>
           </div>

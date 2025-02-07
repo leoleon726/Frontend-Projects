@@ -10,11 +10,14 @@ import AppSidebar from "./AppSidebar";
 import AppTopbar from "./AppTopbar";
 import AppConfig from "./AppConfig";
 import { LayoutContext } from "./context/layoutcontext";
-import PrimeReact from "primereact/api";
+import { PrimeReactContext } from "primereact/api";
 import { ChildContainerProps, LayoutState, AppTopbarRef } from "@utils/types/types";
+
+import "primereact/resources/themes/lara-dark-cyan/theme.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const Layout = ({ children }: ChildContainerProps) => {
+  const primeReact = useContext(PrimeReactContext);
   const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
   const topbarRef = useRef<AppTopbarRef>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -85,7 +88,7 @@ const Layout = ({ children }: ChildContainerProps) => {
   };
 
   useMountEffect(() => {
-    PrimeReact.ripple = true;
+    primeReact.ripple = true;
   });
 
   useEffect(() => {

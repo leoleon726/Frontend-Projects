@@ -17,6 +17,7 @@ import styles from "./login.module.css";
 import Image from "next/image";
 import logoDark from "@presentation/images/logo-lehrer-dark.svg";
 import logoLight from "@presentation/images/logo-lehrer-white.svg";
+import "primereact/resources/themes/lara-dark-cyan/theme.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const LoginPage: Page = () => {
@@ -137,7 +138,7 @@ LoginPage.getLayout = function getLayout(page) {
   return (
     <React.Fragment>
       {page}
-      <AppConfig simple />
+      <AppConfig />
     </React.Fragment>
   );
 };
