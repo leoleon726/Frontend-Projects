@@ -1,20 +1,21 @@
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
-import AppConfig from "../../../presentation/layout/AppConfig";
+import AppConfig from "@presentation/layout/AppConfig";
 import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
-import { LayoutContext } from "../../../presentation/layout/context/layoutcontext";
+import { LayoutContext } from "@presentation/layout/context/layoutcontext";
 import { InputText } from "primereact/inputtext";
 import { classNames } from "primereact/utils";
-import { Page } from "../../../utils/types/types";
-import { useAuth } from "../../../presentation/context/AuthContext";
+import { Page } from "@utils/types/types";
+import { useAuth } from "@presentation/context/AuthContext";
 import { Form } from "react-bootstrap";
 import validator from "validator";
 import { Divider } from "primereact/divider";
 import Image from "next/image";
 import logoDark from "@presentation/images/logo-lehrer-dark.svg";
 import logoLight from "@presentation/images/logo-lehrer-white.svg";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const SignUpPage: Page = () => {
   const { user, signup } = useAuth();

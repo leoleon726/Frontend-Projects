@@ -4,11 +4,11 @@ import { DataTable, DataTableFilterMeta, DataTableRowClickEvent } from "primerea
 import { Column, ColumnFilterApplyTemplateOptions, ColumnFilterElementTemplateOptions, ColumnFilterClearTemplateOptions } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Demo } from "../../../utils/types/types";
+import { Demo } from "@utils/types/types";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { MultiSelect } from "primereact/multiselect";
 import { Calendar } from "primereact/calendar";
-import Greeting from "../../../presentation/components/Greeting";
+import Greeting from "@presentation/components/Greeting";
 import { useRouter } from "next/router";
 import styles from "./teacher.module.css";
 

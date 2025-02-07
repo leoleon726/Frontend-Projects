@@ -11,7 +11,8 @@ import AppTopbar from "./AppTopbar";
 import AppConfig from "./AppConfig";
 import { LayoutContext } from "./context/layoutcontext";
 import PrimeReact from "primereact/api";
-import { ChildContainerProps, LayoutState, AppTopbarRef } from "../../utils/types/types";
+import { ChildContainerProps, LayoutState, AppTopbarRef } from "@utils/types/types";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const Layout = ({ children }: ChildContainerProps) => {
   const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);

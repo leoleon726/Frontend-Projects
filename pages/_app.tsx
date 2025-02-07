@@ -7,7 +7,7 @@ import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import "@presentation/styles/layout/layout.scss";
-import { AuthContextProvider } from "../presentation/context/AuthContext";
+import { AuthContextProvider } from "@presentation/context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedRoute from "@presentation/components/ProtectedRoute";
 const noAuthRequired = ["/auth/login", "/auth/signup", "/"];

@@ -1,7 +1,7 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import React, { useEffect, useState } from "react";
-import { Demo } from "../../../../../utils/types/types";
+import { Demo } from "@utils/types/types";
 import { useRouter } from "next/router";
 import styles from "./report-class.module.css";
 import { Calendar } from "primereact/calendar";
